@@ -22,7 +22,13 @@ def check_account_exist(id: int):
     for x in db:
         if (x["id"] == id):
             return True
-
+def set_account_balance_by_id(id: int, balance: int):
+    """
+    Method to set a new value in balance founded by id
+    """
+    for x in db:
+        if (x["id"] == id):
+            x["balance"] = balance
 
 #routes
 @app.get('/')
