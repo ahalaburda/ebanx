@@ -38,3 +38,15 @@ def reset():
     db.clear()
     return "OK"
 
+@app.get('/balance')
+def get_balance(account_id: Optional[int] = None):
+    """
+    Get data from balance model using ID account as a parameter.
+    """
+    if (check_account_exist(account_id) == True):
+        for x in db:
+            value = x["balance"]
+        return value
+    else:
+        raise HTTPException(status_code=404, detail=0)
+
