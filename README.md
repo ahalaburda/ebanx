@@ -1,10 +1,10 @@
 # ebanx-home-assignment
 
-This is my submission to the EBANX home assignment during the inteview process
+This is my submission to the EBANX home assignment during the inteview process.
 
 ## Instalation
 
-Made with FastApi, so you install first Python 3 and pip to install all the necesaray dependencies, if you have installed just run
+Made with [I'm an inline-style link](https://fastapi.tiangolo.com/), so you need install first Python 3 and pip to later install all the nece dependencies, if you have installed just run
 ```
 pip install -r requiremets.txt
 ```
