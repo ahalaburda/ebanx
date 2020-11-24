@@ -53,3 +53,52 @@ def get_balance(account_id: Optional[int] = None):
     else:
         raise HTTPException(status_code=404, detail=0)
 
+@app.post('/event')
+def create_event(type: Optional[str] = None, amount: Optional[int] = None, origin: Optional[int] = None, destination: Optional[int] = None):
+    """
+    Based on the value of the type received, it will perform actions such as deposit,
+    create an account if it does not exist, withdraw or transfer money, then saving in the database in memory
+    """
+    if(type == "deposit"):
+        if (check_account_exist(destination) == True and origin == None):
+            for account in db:
+                if (acount["id"] == destination):
+                    account["balance"] = account["balance"] + amount
+                    return {"destination": {"id": destination, "balance": account["balance"]}}
+                elif(origin == None):
+                    account = {
+                        "id" : destination,
+                        "balance" : amount
+                    }
+                    db.append(amount)
+                    return {"destination": {"id": destination, "balance": amount}}
+        else:
+            raise HTTPException(status_code=404, detail="Sorry, deposit not success.")
+
+    if(type == "withdraw"):
+        if (check_account_exist(origin) == True):
+            for amount in db:
+                if (account["id"] == origin):
+                    account["balance"] = account["balance"] - amount
+                    return {"origin": {"id": origin, "balance": account["balance"]}}
+        else:
+            raise HTTPException(status_code=404, detail=0)
+
+    if(type == "transfer"):
+        if (check_account_exist(origin) == True and check_account_exist(destination) == True):
+            for x in db:
+                if (x["id"] == origin):
+                    origin_account_id = x["id"]
+                    origin_balance = x["balance"]
+
+                elif (x["id"] == destination):
+                    destiantion_account_id = x["id"]
+                    destiantion_balance = x["balance"]
+            sub = origin_balance - amount
+            add = destination_balance + amount
+            set_account_balance_by_id(origin_account_id, sub)
+            set_account_balance_by_id(destinatios_account_id, add)
+            return {"origin": {"id": origin_id, "balance": sub}, "destination": {"id": destination_id, "balance": add}}
+
+        else:
+            raise HTTPException(status_code=404, detail=0)
