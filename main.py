@@ -8,6 +8,24 @@ db=[]
 
 
 class Balance(BaseModel)>
-	id: int
-	balance: int
+    id: int
+    balance: int
+
+#routes
+@app.get('/')
+def index():
+    """
+    Just a Super Friendly method
+    """
+    return {"Hello": "World"}
+
+@app.post('/reset')
+def reset():
+    """
+    Reset all DB and insert the first account
+    """
+    db.clear()
+    return "OK"
+
+
 
