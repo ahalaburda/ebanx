@@ -1,7 +1,7 @@
 from typing import Optional
 
-from fastapi import FastAPI
-from pydantic import BaseModel, HTTPException
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -10,7 +10,7 @@ app = FastAPI()
 db=[]
 
 
-class Balance(BaseModel)>
+class Balance(BaseModel):
     id: int
     balance: int
 
