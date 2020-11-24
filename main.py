@@ -11,6 +11,16 @@ class Balance(BaseModel)>
     id: int
     balance: int
 
+
+def check_account_exist(id: int):
+    """
+    Check if the account id exists registered in the database.
+    """
+    for x in db:
+        if (x["id"] == id):
+            return True
+
+
 #routes
 @app.get('/')
 def index():
@@ -19,6 +29,7 @@ def index():
     """
     return {"Hello": "World"}
 
+
 @app.post('/reset')
 def reset():
     """
@@ -26,6 +37,4 @@ def reset():
     """
     db.clear()
     return "OK"
-
-
 
